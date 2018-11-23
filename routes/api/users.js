@@ -2,6 +2,7 @@ const express = require("express");
 const gravatar = require("gravatar");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const passport = require("passport");
 
 const router = express.Router();
 
@@ -106,5 +107,22 @@ router.post("/login", (req, res) => {
     });
   });
 });
+
+// @route     GET api/users/current
+// @desc      Returns the current user the token belongs to
+// @access    private route
+router.get(
+  "/current",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    res.json({
+      id: req.user.id,
+      name: req.user.name,
+      email: req.user.email,
+      avatar: req.user.avatar,
+      date: req.user.date
+    });
+  }
+);
 
 module.exports = router;
