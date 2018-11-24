@@ -6,6 +6,10 @@ const passport = require("passport");
 
 const router = express.Router();
 
+// Load Input Validator
+const validateRegisterInput = require("../../validation/register");
+const validateLoginInput = require("../../validation/login");
+
 // Load User Model
 
 const User = require("../../models/User");
@@ -24,6 +28,13 @@ router.get("/test", (req, res) =>
 // @desc      Register user route
 // @access    public route
 router.post("/register", (req, res) => {
+  const { errors, isvalid } = validateRegisterInput(req.body);
+
+  // Check Validation
+  if (!isvalid) {
+    return res.status(400).json(errors);
+  }
+
   User.findOne({ email: req.body.email }).then(user => {
     if (user) {
       return res.status(400).send({
@@ -63,6 +74,13 @@ router.post("/register", (req, res) => {
 // @desc      Login user / Returning JWT Token
 // @access    public route
 router.post("/login", (req, res) => {
+  const { errors, isvalid } = validateLoginInput(req.body);
+
+  // Check Validation
+  if (!isvalid) {
+    return res.status(400).json(errors);
+  }
+
   const email = req.body.email;
   const passwor = req.body.password;
 
