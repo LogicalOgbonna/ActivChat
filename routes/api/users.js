@@ -88,9 +88,8 @@ router.post("/login", (req, res) => {
   User.findOne({ email }).then(user => {
     //Check for User
     if (!user) {
-      return res
-        .status(404)
-        .send({ email: `The User with email ${email} was not found` });
+      errors.email = `The User with email ${email} was not found`;
+      return res.status(404).json(errors);
     }
 
     // Check Password
@@ -118,9 +117,8 @@ router.post("/login", (req, res) => {
           }
         );
       } else {
-        return res.status(400).json({
-          password: `The password for the Email ${email} is incorrect`
-        });
+        errors.password = `The password for the Email ${email} is incorrect`;
+        return res.status(400).json(errors);
       }
     });
   });
