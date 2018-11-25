@@ -15,12 +15,18 @@ app.use(bodyParser.json());
 
 // DB Config
 const db = require("./config/keys").mongoURI;
+const dblocal = require("./config/keys").mongoLocalURI;
 
 // Connect to MongoDB
 
 mongoose
   .connect(db)
   .then(() => console.log("MongoDB Connected Succesfully"))
+  .catch(error => console.log(error));
+
+mongoose
+  .connect(dblocal)
+  .then(() => console.log("MongoDB Local Connected Succesfully"))
   .catch(error => console.log(error));
 
 // Passport middleware
