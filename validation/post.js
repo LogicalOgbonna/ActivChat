@@ -7,9 +7,9 @@ module.exports = function validatePostInput(data) {
 
   data.text = !isEmpty(data.text) ? data.text : "";
 
-  if (!validator.isLength(data.text, { min: 10, max: 300 })) {
-    errors.text = "Post field must be between 10 to 300  ";
-  }
+  // if (!validator.isLength(data.text, { min: 10, max: 300 })) {
+  //   errors.text = "Post field must be between 10 to 300  ";
+  // }
 
   if (validator.isEmpty(data.text)) {
     errors.text = "Post field is required";

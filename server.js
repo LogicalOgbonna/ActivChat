@@ -19,10 +19,10 @@ const dblocal = require("./config/keys").mongoLocalURI;
 
 // Connect to MongoDB
 
-mongoose
-  .connect(db)
-  .then(() => console.log("MongoDB Connected Succesfully"))
-  .catch(error => console.log(error));
+// mongoose
+//   .connect(db)
+//   .then(() => console.log("MongoDB Connected Succesfully"))
+//   .catch(error => console.log(error));
 
 mongoose
   .connect(dblocal)
