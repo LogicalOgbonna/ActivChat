@@ -82,7 +82,7 @@ router.post("/login", (req, res) => {
   }
 
   const email = req.body.email;
-  const passwor = req.body.password;
+  const password = req.body.password;
 
   //Find User by Email
   User.findOne({ email }).then(user => {
@@ -93,7 +93,7 @@ router.post("/login", (req, res) => {
     }
 
     // Check Password
-    bcrypt.compare(passwor, user.password).then(isMatch => {
+    bcrypt.compare(password, user.password).then(isMatch => {
       if (isMatch) {
         // User Password Matched
 
