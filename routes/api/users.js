@@ -35,13 +35,15 @@ router.post("/register", (req, res) => {
     return res.status(400).json(errors);
   }
 
-  User.findOne({ email: req.body.email }).then(user => {
+  const email = req.body.email.toLowerCase();
+
+  User.findOne({ email }).then(user => {
     if (user) {
       return res.status(400).send({
-        email: `Email ${req.body.email} aready Exit`
+        email: `Email ${email} aready Exit`
       });
     } else {
-      const avatar = gravatar.url(req.body.email, {
+      const avatar = gravatar.url(email, {
         s: "200", // Size
         r: "pg", //  Rating
         d: "mm" //  Default
@@ -49,7 +51,7 @@ router.post("/register", (req, res) => {
 
       const newUser = new User({
         name: req.body.name,
-        email: req.body.email,
+        email,
         avatar,
         password: req.body.password
       });
@@ -81,7 +83,7 @@ router.post("/login", (req, res) => {
     return res.status(400).json(errors);
   }
 
-  const email = req.body.email;
+  const email = req.body.email.toLowerCase();
   const password = req.body.password;
 
   //Find User by Email

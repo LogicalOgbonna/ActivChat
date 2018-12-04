@@ -11,7 +11,7 @@ module.exports = function validateEducationInput(data) {
   data.from = !isEmpty(data.from) ? data.from : "";
 
   if (!validator.isLength(data.school, { min: 5, max: 20 })) {
-    errors.school = "School name needs to be between 5 and 20 characters";
+    errors.school = "School name needs to be atleast 3 characters and above";
   }
 
   if (validator.isEmpty(data.school)) {
@@ -19,7 +19,7 @@ module.exports = function validateEducationInput(data) {
   }
 
   if (!validator.isLength(data.degree, { min: 3, max: 15 })) {
-    errors.degree = "Degree field needs to be between 3 and 15 characters";
+    errors.degree = "Degree field needs to be atleast 3 characters and above";
   }
 
   if (validator.isEmpty(data.degree)) {
@@ -28,7 +28,7 @@ module.exports = function validateEducationInput(data) {
 
   if (!validator.isLength(data.fieldofstudy, { min: 5, max: 20 })) {
     errors.fieldofstudy =
-      "Field of study needs to be between 5 and 20 characters";
+      "Field of study needs to be atleast 5  characters and above";
   }
 
   if (validator.isEmpty(data.fieldofstudy)) {
